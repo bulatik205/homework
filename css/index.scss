@@ -15,6 +15,10 @@ body {
 }
 
 @media (min-width: 0px) {
+    * {
+        overflow-x: hidden;
+    }
+
     .visual--effect {
         position: absolute;
         aspect-ratio: 1 / 1;
@@ -58,6 +62,7 @@ body {
                 width: 100%;
                 @include flex(start, column);
                 align-items: start;
+                box-sizing: border-box;
 
                 .main--block--two--links--block__for {
                     @include flex(start, column);
@@ -97,6 +102,20 @@ body {
 
         .main--block__two {
             padding: 20px;
+
+            .link-open {
+                margin-top: 10px;
+                padding: 20px;
+                border-radius: 20px;
+                background-color: rgba(160, 120, 190, 0.2);
+                border-left: 5px solid #9368b6;
+
+                div {
+                    a {
+                        text-decoration-color: #9368b6;
+                    }
+                }
+            }
 
             h1 {
                 margin-top: 20px;
