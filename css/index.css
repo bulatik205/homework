@@ -1,1 +1,19 @@
-/*# sourceMappingURL=index.css.map */
+@media (min-width: 0px) {
+  header {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+  }
+}
+@media (max-width: 1000px) {
+  header {
+    padding: 10px;
+    height: 10vh;
+    font-size: 14px;
+  }
+}/*# sourceMappingURL=index.css.map */

@@ -1,9 +1,27 @@
-@media (max-width: 0px) {
+@mixin flex($j-center, $f-row) {
+    display: flex;
+    align-items: center;
+    justify-content: $j-center;
+    flex-direction: $f-row;
+}
 
+@media (min-width: 0px) {
+    header {
+        width: 100%;
+        background-color: #000;
+        color: #fff;
+        box-sizing: border-box;
+
+        @include flex(start, row);
+    }
 }
 
 @media (max-width: 1000px) {
-
+    header {
+        padding: 10px;
+        height: 10vh;
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 10000px) {
