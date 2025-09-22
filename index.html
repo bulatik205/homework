@@ -25,8 +25,8 @@
         <div class="main--block__two">
             <h1>Ссылки:</h1>
             <div class="main--block--two__links">
-                <h1>Для пользоватлей</h1>
-                <div class="main--block--two--links__block link-open">
+                <h1 onclick="updateDisplay(`users`)">Для пользоватлей</h1>
+                <div class="main--block--two--links__block link-open" id="users">
                     <div class="main--block--two--links--block__for users">
                         <a href="">Авторизоваться</a>
                         <a href="">Дашборд</a>
@@ -34,8 +34,8 @@
                     </div>
                 </div>
 
-                <h1>Для админов</h1>
-                <div class="main--block--two--links__block link-closed">
+                <h1 onclick="updateDisplay(`admin`)">Для админов</h1>
+                <div class="main--block--two--links__block link-closed" id="admin">
                     <div class="main--block--two--links--block__for admin">
                         <a href="">Добавить</a>
                         <a href="">Редактировать</a>
@@ -43,16 +43,16 @@
                     </div>
                 </div>
 
-                <h1>Для всех</h1>
-                <div class="main--block--two--links__block link-closed">
+                <h1 onclick="updateDisplay(`all`)">Для всех</h1>
+                <div class="main--block--two--links__block link-closed" id="all">
                     <div class="main--block--two--links--block__for all">
                         <a href="">Получить данные</a>
                         <a href="">Перейти на премиум</a>
                     </div>
                 </div>
 
-                <h1>Для премиум пользователей</h1>
-                <div class="main--block--two--links__block link-closed">
+                <h1 onclick="updateDisplay(`premium`)">Для премиум пользователей</h1>
+                <div class="main--block--two--links__block link-closed" id="premium">
                     <div class="main--block--two--links--block__for premium">
                         <a href="">Получить данные</a>
                         <a href="">Проверить статус аккаунта</a>
@@ -62,6 +62,8 @@
             </div>
         </div>
     </main>
+
+    <script src="handlers/index-handlers.js"></script>
 </body>
 
 </html>
