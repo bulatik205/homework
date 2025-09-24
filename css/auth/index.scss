@@ -107,6 +107,20 @@ header {
             border: 0;
         }
     }
+
+    .errors {
+        max-width: 70%;
+        width: 70%;
+        @include flex(center, column);
+
+        div {
+            max-width: 70%;
+            box-sizing: border-box;
+            background-color: rgba(221, 113, 96, 0.3);
+            border-radius: 15px;
+            border-left: 3px solid #d63329;
+        }
+    }
 }
 
 @media (max-width: 1000px) {
@@ -189,6 +203,20 @@ header {
 
         button {
             padding: 15px 40px;
+        }
+    }
+
+    .errors {
+        div {
+            padding: 20px 20px;
+
+            h1 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
         }
     }
 }

@@ -105,6 +105,19 @@ header {
   .nav .close-type {
     border: 0;
   }
+  .errors {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .errors div {
+    box-sizing: border-box;
+    background-color: rgba(221, 113, 96, 0.3);
+    border-radius: 15px;
+    border-left: 3px solid #d63329;
+  }
 }
 @media (max-width: 1000px) {
   header {
@@ -167,5 +180,14 @@ header {
   }
   .nav button {
     padding: 15px 40px;
+  }
+  .errors div {
+    padding: 20px 60px;
+  }
+  .errors div h1 {
+    font-size: 18px;
+  }
+  .errors div p {
+    font-size: 14px;
   }
 }/*# sourceMappingURL=index.css.map */
