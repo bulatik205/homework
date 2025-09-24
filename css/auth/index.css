@@ -1,133 +1,165 @@
 * {
   z-index: 2;
+  border: 0;
   color: #fff;
 }
 
-body {
+header {
+  width: 100%;
   background-color: #000;
-  position: relative;
+  color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: row;
 }
 
 @media (min-width: 0px) {
-  header {
-    width: 100%;
+  body {
     background-color: #000;
+    margin: 0;
+  }
+  info {
+    background-color: rgba(104, 182, 176, 0.3);
+    border-left: 3px solid rgb(104, 182, 176);
+    color: #fff;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  main {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  main .main-- {
+    border: 1px solid #fff;
+    border-radius: 15px;
+    box-sizing: border-box;
+  }
+  main .main-- button {
+    background-color: #9368b6;
     color: #fff;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    flex-direction: row;
+    border-radius: 15px;
   }
-  .not-active-auth {
-    display: none;
-  }
-  main {
-    width: 100%;
-    box-sizing: border-box;
+  main .main-- .main__ {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
   }
-  main .main--auth__block {
-    gap: 20px;
-    width: 100%;
-    border: 2px solid #9368b6;
-    border-radius: 25px;
-    box-sizing: border-box;
+  main .main-- .main__ .main--log__type {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-  }
-  main .main--auth__block .main--auth--block__nav {
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 15px;
-    background-color: rgba(147, 104, 182, 0.2);
-  }
-  main .main--auth__block .main--auth--block__nav .main--auth--block--nav__body {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
     flex-direction: row;
   }
-  main .main--auth__block .main--auth--block__nav .main--auth--block--nav__body button {
-    box-sizing: border-box;
-    border: 0;
-    border-radius: 10px;
-    background-color: rgba(147, 104, 182, 0.5);
-    min-width: 40%;
-  }
-  main .main--auth__block .main--auth--block__nav .main--auth--block--nav__body .active-auth-button {
-    border-bottom: 2px solid #9368b6;
-    border-top: 2px solid #9368b6;
-  }
-  main .main--auth__block .active-auth {
-    width: 100%;
-    background-color: rgba(147, 104, 182, 0.2);
-    box-sizing: border-box;
-    border-radius: 15px;
-  }
-  main .main--auth__block .active-auth h1 {
-    box-sizing: border-box;
-  }
-}
-@media (max-width: 1000px) {
-  header {
-    padding: 20px;
-  }
-  main {
-    padding: 20px;
-  }
-  main h1 {
-    font-size: 24px;
-  }
-  main .main--auth__block {
-    padding: 20px;
-  }
-  main .main--auth__block .main--auth--block__nav .main--auth--block--nav__body {
-    padding: 10px;
-  }
-  main .main--auth__block .main--auth--block__nav .main--auth--block--nav__body button {
-    padding: 15px;
-    font-size: 16px;
-  }
-  main .main--auth__block .reg {
-    padding: 25px;
-  }
-  main .main--auth__block .reg h1 {
-    padding: 10px 0px;
-  }
-  main .main--auth__block .reg .main--auth--block--type--body--telegram h1 {
-    font-size: 20px;
-  }
-  main .main--auth__block .reg .main--auth--block--type--body--form {
+  main .main-- .main__ .main--__form {
     display: flex;
     align-items: center;
     justify-content: start;
     flex-direction: column;
     align-items: start;
   }
-  main .main--auth__block .reg .main--auth--block--type--body--form * {
-    margin: 10px 0px;
+  main .main-- .main__ .main--__form input {
+    box-sizing: border-box;
+    background-color: rgba(147, 104, 182, 0.3);
+    border-left: 3px solid #9368b6;
+    color: #fff;
+    border-radius: 10px;
   }
-  main .main--auth__block .reg .main--auth--block--type--body--form label {
+  main .main-- .main__ .main--__form .telegram-auth {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    align-items: start;
+  }
+  main .main-- .main__ .main--__form .telegram-auth .telegram-t {
+    font-size: 18px;
+  }
+  main .main-- .main__ .main--__form .rules {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+  .nav {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+  .nav button {
+    background-color: rgba(147, 104, 182, 0.3);
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+  .nav .active-type {
+    border-bottom: 2px solid #9368b6;
+    border-top: 2px solid #9368b6;
+  }
+}
+@media (max-width: 1000px) {
+  header {
+    padding: 20px;
     font-size: 14px;
   }
-  main .main--auth__block .reg .main--auth--block--type--body--form input[type=text],
-  main .main--auth__block .reg .main--auth--block--type--body--form input[type=number] {
-    padding: 5px;
-    background-color: rgba(147, 104, 182, 0.5);
-    border-radius: 5px;
-    border: 0;
-  }
-  main .main--auth__block .reg .main--auth--block--type--body--form button {
-    background-color: rgba(147, 104, 182, 0.5);
-    border: 0;
-    border-radius: 15px;
+  info {
     padding: 10px;
-    font-size: 16px;
+  }
+  info label {
+    font-size: 10px;
+  }
+  main {
+    padding: 20px;
+  }
+  main .main-- {
+    padding: 20px;
+  }
+  main .main-- button {
+    padding: 10px 40px;
+  }
+  main .main-- .main__ .main--log__type {
+    gap: 20px;
+  }
+  main .main-- .main__ .main--log__type button {
+    background-color: rgba(147, 104, 182, 0.3);
+    padding: 10px 20px;
+    border-radius: 15px;
+  }
+  main .main-- .main__ .main--log__type .active-log-type {
+    border-bottom: 2px solid #9368b6;
+    border-top: 2px solid #9368b6;
+  }
+  main .main-- .main__ .main--__form {
+    gap: 10px;
+  }
+  main .main-- .main__ .main--__form label {
+    font-size: 18px;
+  }
+  main .main-- .main__ .main--__form input {
+    padding: 7px;
+  }
+  main .main-- .main__ .main--__form .telegram-auth {
+    gap: 10px;
+  }
+  main .main-- .main__ .main--__form .telegram-auth .telegram-p {
+    font-size: 14px;
+  }
+  main .main-- .main__ .main--__form .telegram-auth info label {
+    font-size: 14px;
+  }
+  main .main-- .main__ .main--__form .rules {
+    gap: 10px;
+  }
+  .nav {
+    padding: 20px;
+  }
+  .nav button {
+    padding: 15px 40px;
   }
 }/*# sourceMappingURL=index.css.map */

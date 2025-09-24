@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Авторизация</title>
+    <title>Auth</title>
     <link rel="stylesheet" href="/css/auth/index.css">
     <link rel="stylesheet" href="/css/font/index.css">
 </head>
@@ -14,78 +14,80 @@
         <h1>homework : : :</h1>
     </header>
 
+    <div class="nav">
+        <button class="active-type">Регистрация</button>
+        <button>Вход</button>
+    </div>
+
     <main>
-        <h1>Авторизуйтесь</h1>
+        <div class="main--" id="">
+            <div class="main__">
+                <h1>Регистрация</h1>
 
-        <div class="main--auth__block">
-            <div class="main--auth--block__nav">
-                <div class="main--auth--block--nav__body">
-                    <button onclick="" class="active-auth-button">Регистрация</button>
-                    <button onclick="">Вход</button>
-                </div>
-            </div>
+                <div class="main--__form">
+                    <label for="username">Придумайте имя</label>
+                    <input type="text" name="username" id="username">
 
-            <div class="main--auth--block__type reg not-active-auth">
-                <div class="main--auth--block--type__body">
-                    <h1>Регистрация</h1>
+                    <label for="username">Придумайте пароль</label>
+                    <input type="text" name="username" id="username">
 
-                    <!-- нету стринг -->
-                    <div class="main--auth--block--type--body--telegram">
-                        <h1>Перейдите по ссылке для регистрации:</h1>
-                        <a href="https://t.me/bulatik_test_bot">Перейти</a>
+                    <div class="telegram-auth">
+                        <label for="telegram" class="telegram-t">Код подтверждения</label>
+                        <label for="telegram" class="telegram-p"><a href="https://t.me/bulatik_test_bot">Бот</a> отправит его вам</label>
+                        <input type="number" name="telegram" id="telegram" placeholder="homework-XXXXXX">
+                        <button onclick="">Отправить код</button>
+                        <info id="telegram-info">
+                            <label id="telegram-info-title">Новый код через: 60 секунд</label>
+                        </info>
                     </div>
 
-                    <!-- стринг -->
-                    <div class="main--auth--block--type--body--form">
-                        <label for="username">Придумайте никнейм</label>
-                        <input type="text" name="username" id="username">
-
-                        <label for="password">Придумайте пароль:</label>
-                        <input type="text" name="password" id="password">
-
-                        <label for="code">Код</label>
-                        <input type="number" name="code" id="code">
-                        <button onclick="">Выслать код</button>
-
-                        <div class="main--auth--block--type--body--form__rules">
-                            <input type="checkbox" name="rules" id="rules">
-                            <label for="rules">Согласен с <a href="">правилами</a></label>
-                        </div>
-
-                        <button onclick="">Регистрация</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="main--auth--block__type log active-auth">
-                <div class="main--auth--block--type__body">
-                    <h1>Вход</h1>
-
-                    <!-- нету стринг -->
-                    <div class="main--auth--block--type__login password">
-                        <label for="username">Никнейм</label>
-                        <input type="text" name="username" id="username">
-
-                        <label for="password">Пароль</label>
-                        <input type="text" name="password" id="password">
-
-                        <button onclick="">Вход</button>
+                    <div class="rules">
+                        <input type="checkbox" name="rules" id="rules">
+                        <label for="rules">Согласен с правилами</label>
                     </div>
 
-                    <!-- нету стринг -->
-                    <div class="main--auth--block--type__login telegram">
-                        <h1>Перейдите по ссылке для авторизации:</h1>
-                        <a href="https://t.me/bulatik_test_bot">Перейти</a>
-                    </div>
-
-
+                    <button onclick="">Регистрация</button>
                 </div>
             </div>
         </div>
 
-        <div id="main--errors">
-            <h1 id="main--errors__title"></h1>
-            <p id="main--errors__message"></p>
+        <div class="main--" style="display: none;">
+            <div class="main__" id="">
+                <h1>Вход</h1>
+
+                <div class="main--log__type">
+                    <button class="active-log-type">С паролем</button>
+                    <button>Через бота</button>
+                </div>
+
+                <div class="main--__form">
+                    <label for="username">Введите имя</label>
+                    <input type="text" name="username" id="username">
+
+                    <label for="username">Введите пароль</label>
+                    <input type="text" name="username" id="username">
+
+                    <button onclick="">Вход</button>
+                </div>
+
+                <div class="main--__form" style="display: none;">
+                    <div class="telegram-auth">
+                        <div class="telegram-auth-warring">
+                            <label for="">Зайдите в <a href="https://t.me/bulatik_test_bot">бота</a>, получите ссылку для авторизации и вернитесь, <label style="color: rgb(120, 170, 170);">перейдя по ней</label></label>
+                        </div>
+
+                        <label for="telegram" class="telegram-t">Код подтверждения</label>
+                        <label for="telegram" class="telegram-p"><a href="https://t.me/bulatik_test_bot">Бот</a> отправит его вам</label>
+                        <input type="number" name="telegram" id="telegram" placeholder="homework-XXXXXX">
+                        <button onclick="">Отправить код</button>
+                        <info id="telegram-info">
+                            <label id="telegram-info-title">Новый код через: 60 секунд</label>
+                        </info>
+                    </div>
+
+                    <button onclick="">Вход</button>
+                </div>
+            </div>
         </div>
     </main>
 </body>
