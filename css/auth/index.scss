@@ -102,6 +102,10 @@ header {
             border-bottom: 2px solid #9368b6;
             border-top: 2px solid #9368b6;
         }
+
+        .close-type {
+            border: 0;
+        }
     }
 }
 
@@ -142,6 +146,10 @@ header {
                     .active-log-type {
                         border-bottom: 2px solid #9368b6;
                         border-top: 2px solid #9368b6;
+                    }
+
+                    .close-log-type {
+                        border: 0;
                     }
                 }
 

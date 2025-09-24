@@ -15,12 +15,12 @@
     </header>
 
     <div class="nav">
-        <button class="active-type">Регистрация</button>
-        <button>Вход</button>
+        <button onclick="navClick(`register`)" class="active-type" id="buttonR">Регистрация</button>
+        <button onclick="navClick(`login`)" id="buttonL">Вход</button>
     </div>
 
     <main>
-        <div class="main--" id="">
+        <div class="main--" id="reg">
             <div class="main__">
                 <h1>Регистрация</h1>
 
@@ -51,16 +51,16 @@
             </div>
         </div>
 
-        <div class="main--" style="display: none;">
-            <div class="main__" id="">
+        <div class="main--" style="display: none;" id="log">
+            <div class="main__">
                 <h1>Вход</h1>
 
                 <div class="main--log__type">
-                    <button class="active-log-type">С паролем</button>
-                    <button>Через бота</button>
+                    <button onclick="logNavClick(`p`)" id="buttonLP" class="active-log-type">С паролем</button>
+                    <button onclick="logNavClick(`b`)" id="buttonLB">Через бота</button>
                 </div>
 
-                <div class="main--__form">
+                <div class="main--__form" id="p">
                     <label for="username">Введите имя</label>
                     <input type="text" name="username" id="username">
 
@@ -70,7 +70,7 @@
                     <button onclick="">Вход</button>
                 </div>
 
-                <div class="main--__form" style="display: none;">
+                <div class="main--__form" style="display: none;" id="b">
                     <div class="telegram-auth">
                         <div class="telegram-auth-warring">
                             <label for="">Зайдите в <a href="https://t.me/bulatik_test_bot">бота</a>, получите ссылку для авторизации и вернитесь, <label style="color: rgb(120, 170, 170);">перейдя по ней</label></label>
@@ -90,6 +90,8 @@
             </div>
         </div>
     </main>
+
+    <script src="/handlers/auth-handler.js"></script>
 </body>
 
 </html>

@@ -102,6 +102,9 @@ header {
     border-bottom: 2px solid #9368b6;
     border-top: 2px solid #9368b6;
   }
+  .nav .close-type {
+    border: 0;
+  }
 }
 @media (max-width: 1000px) {
   header {
@@ -134,6 +137,9 @@ header {
   main .main-- .main__ .main--log__type .active-log-type {
     border-bottom: 2px solid #9368b6;
     border-top: 2px solid #9368b6;
+  }
+  main .main-- .main__ .main--log__type .close-log-type {
+    border: 0;
   }
   main .main-- .main__ .main--__form {
     gap: 10px;
