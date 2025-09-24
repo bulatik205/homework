@@ -1,0 +1,35 @@
+@import url("../font/index.css");
+
+* {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    background-color: #000;
+}
+
+body {
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+info {
+    background-color: rgba(147, 104, 182, 0.3);
+    color: #fff;
+    border-left: 3px solid #9368b6;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    padding: 30px;
+
+    h1, p, a {
+        background-color: transparent;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    a {
+        color: #fff;
+    }
+}

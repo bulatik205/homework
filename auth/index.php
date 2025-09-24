@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . "/../auth/authorizer.php";
+?>
+
+<?php if ($authValid): ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +10,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth</title>
-    <link rel="stylesheet" href="/css/auth/index.css">
-    <link rel="stylesheet" href="/css/font/index.css">
+    <link rel="stylesheet" href="../css/auth/index.css">
+    <link rel="stylesheet" href="../css/font/index.css">
 </head>
 
 <body>
@@ -91,7 +96,11 @@
         </div>
     </main>
 
-    <script src="/handlers/auth-handler.js"></script>
+    <script src="../handlers/auth-handler.js"></script>
 </body>
 
 </html>
+
+<?php else: ?>
+    <?php require("../logger/auth.php") ?> 
+<?php endif ?>
