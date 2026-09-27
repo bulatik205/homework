@@ -1,14 +1,14 @@
 package main
 
 import (
-	"homework/internal/blame"
+	"homework/internal/handler"
 	"net/http"
 	"time"
 )
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", blame.Index)
+	mux.HandleFunc("/", handler.Index)
 
 	server := &http.Server{
 		Addr:         ":8080",

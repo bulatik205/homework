@@ -1,4 +1,4 @@
-package blame
+package handler
 
 import (
 	"fmt"
