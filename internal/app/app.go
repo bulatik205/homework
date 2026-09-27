@@ -2,6 +2,7 @@ package app
 
 import (
 	"homework/internal/handler"
+	"homework/internal/handler/status"
 	"net/http"
 	"time"
 )
@@ -9,6 +10,7 @@ import (
 func Run() error {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handler.Index)
+	mux.HandleFunc("/api/v1/getStatus", status.GetStatus)
 
 	server := &http.Server{
 		Addr:         ":8080",
