@@ -10,7 +10,7 @@ import (
 func Run() error {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handler.Index)
-	mux.HandleFunc("/api/v1/getStatus", status.GetStatus)
+	mux.HandleFunc("/api/v1/getStatus", status.Get)
 
 	server := &http.Server{
 		Addr:         ":8080",
