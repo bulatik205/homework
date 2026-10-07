@@ -49,24 +49,27 @@ func GetTasks(db *sql.DB) http.HandlerFunc {
 		tasks := []models.Task{}
 		for rows.Next() {
 			var t models.Task
-			var dateFrom, dateTo, status sql.NullString
 
+			var dateFrom, dateTo sql.NullTime
+			var status sql.NullString
 			var cf, uf sql.NullTime
+
 			if err := rows.Scan(
 				&t.ID, &t.Subject, &t.Task,
 				&dateFrom, &dateTo, &status,
 				&cf, &uf,
 			); err != nil {
+				log.Printf("getTasks scan: %v", err)
 				writeError(w, http.StatusInternalServerError, "scan error")
 				return
 			}
 
 			if dateFrom.Valid {
-				s := dateFrom.String
+				s := dateFrom.Time.Format("2006-01-02")
 				t.DateFrom = &s
 			}
 			if dateTo.Valid {
-				s := dateTo.String
+				s := dateTo.Time.Format("2006-01-02")
 				t.DateTo = &s
 			}
 			if status.Valid {
@@ -79,7 +82,6 @@ func GetTasks(db *sql.DB) http.HandlerFunc {
 			if uf.Valid {
 				t.UpdatedAt = uf.Time.Format("2006-01-02 15:04:05")
 			}
-
 			tasks = append(tasks, t)
 		}
 
