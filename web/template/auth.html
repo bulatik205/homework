@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Вход / Регистрация</title>
+    <link rel="stylesheet" href="web/static/css/auth.css">
+</head>
+
+<body>
+    <h2 id="title">Вход</h2>
+
+    <div class="tabs">
+        <button id="tab-login" class="active" type="button">Вход</button>
+        <button id="tab-register" type="button">Регистрация</button>
+    </div>
+
+    <form id="form-login">
+        <input name="username" placeholder="Логин" autocomplete="username" required>
+        <input name="password" type="password" placeholder="Пароль" autocomplete="current-password" required>
+        <button type="submit">Войти</button>
+    </form>
+
+    <form id="form-register" class="hidden">
+        <input name="username" placeholder="Логин" autocomplete="username" required>
+        <input name="password" type="password" placeholder="Пароль (мин. 6)" autocomplete="new-password" required>
+        <input name="key" placeholder="Ключ (id:key)" required>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+
+    <div id="msg" class="msg hidden"></div>
+
+    <script src="web/static/js/auth.js"></script>
+</body>
+
+</html>
