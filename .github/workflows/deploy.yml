@@ -1,0 +1,50 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27'
+
+      - name: Build
+        run: GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o homework-bot .
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy binary
+        run: |
+          rsync -avz \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519" \
+            ./homework-bot \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/homework-bot/homework-bot
+
+          ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519 \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            'chmod +x /opt/homework-bot/homework-bot'
+
+      - name: Deploy static
+        run: |
+          rsync -avz --ignore-missing-args \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519" \
+            ./templates ./styles ./js ./images ./videos ./favicon.ico \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/homework-bot/
+
+      - name: Restart service
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519 \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            'sudo systemctl restart homework-bot'
