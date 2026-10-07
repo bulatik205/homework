@@ -5,6 +5,7 @@ import (
 	"homework/config"
 	"homework/db"
 	"homework/handlers/api"
+	"homework/handlers/web"
 	"log"
 	"net/http"
 )
@@ -24,6 +25,14 @@ func main() {
 	})
 	mux.HandleFunc("/api/v1/ping", api.Ping)
 	mux.HandleFunc("/api/v1/tasks", api.GetTasks(database))
+
+	mux.HandleFunc("/auth", web.AuthPage)
+	mux.HandleFunc("/api/auth/register", web.Register(database))
+	mux.HandleFunc("/api/auth/login", web.Login(database))
+	mux.HandleFunc("/api/auth/logout", web.Logout(database))
+	mux.HandleFunc("/api/auth/me", web.Me(database))
+
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
 
 	log.Printf("listening on 127.0.0.1:%s", cfg.ServerPort)
 	log.Fatal(http.ListenAndServe("127.0.0.1:"+cfg.ServerPort, mux))
