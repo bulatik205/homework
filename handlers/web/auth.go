@@ -53,7 +53,7 @@ func setSessionCookie(w http.ResponseWriter, value string) {
 }
 
 func AuthPage(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "web/templates/auth.html")
+	http.ServeFile(w, r, "web/template/auth.html")
 }
 
 type registerReq struct {
