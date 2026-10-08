@@ -310,7 +310,11 @@ func AdminScheduleNext(w http.ResponseWriter, r *http.Request) {
 	}
 
 	today := time.Now().In(moscowLoc)
-	for i := 0; i < 14; i++ {
+
+	// 1, потому что если сегодня история,
+	// а админ добавляет историю то скрипт берет
+	// и возвращает сегодяншний день
+	for i := 1; i < 14; i++ {
 		d := today.AddDate(0, 0, i)
 		wd := int(d.Weekday())
 		if wd == 0 {
