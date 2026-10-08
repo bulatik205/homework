@@ -25,6 +25,16 @@ body {
     line-height: 1.5;
 }
 
+.task-form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.task-form input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
 .topbar {
     display: flex;
     justify-content: space-between;
