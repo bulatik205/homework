@@ -4,6 +4,8 @@ github.com/bulatik205/homework-alice-sdk v0.0.1 h1:/KLAAubK1cuLs0vPnYHAMZvtTbMWx
 github.com/bulatik205/homework-alice-sdk v0.0.1/go.mod h1:/UfnOuSnVAHAtVqpRz3Zsn5DEktZgHzl2EqwNx7IGE0=
 github.com/bulatik205/homework-alice-sdk v0.0.2 h1:pjdBTBGYRyp6jsVt09ddisleBEsaKdhQDaLptW19Q4M=
 github.com/bulatik205/homework-alice-sdk v0.0.2/go.mod h1:/UfnOuSnVAHAtVqpRz3Zsn5DEktZgHzl2EqwNx7IGE0=
+github.com/bulatik205/homework-alice-sdk v0.0.3 h1:jkim5RHGw8kmTkf81En3I/o4APb9OjR6B8xoDr5Dyck=
+github.com/bulatik205/homework-alice-sdk v0.0.3/go.mod h1:/UfnOuSnVAHAtVqpRz3Zsn5DEktZgHzl2EqwNx7IGE0=
 github.com/bulatik205/homework-sdk-go v0.0.1 h1:4pWHiVIb2qFGKN4n1f6nQhd1tIxlxEU2PG2UosybgtI=
 github.com/bulatik205/homework-sdk-go v0.0.1/go.mod h1:63eHOh4EMtR5TFV5RktXBdmzW0bwtc/34O+OV+3K6SM=
 github.com/go-sql-driver/mysql v1.10.1 h1:arlSnNLq6a5yxGxV7qg9lF4j0C+KwD6NbQyKr9QL6ME=
