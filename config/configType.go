@@ -7,4 +7,5 @@ type Config struct {
 	DBPort     string
 	DBName     string
 	ServerPort string
+	ServerURL  string
 }

@@ -13,6 +13,7 @@ func LoadConfig() Config {
 		DBPort:     getEnv("DB_PORT", "3306"),
 		DBName:     getEnv("DB_NAME", ""),
 		ServerPort: getEnv("SERVER_PORT", ""),
+		ServerURL:  getEnv("SERVER_URL", ""),
 	}
 }
 
