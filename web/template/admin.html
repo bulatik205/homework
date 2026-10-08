@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Админка — задачи</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">homework · admin</div>
+        <div class="user">
+            <span id="me">…</span>
+            <button id="logout" type="button">Выйти</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="toolbar">
+            <h1>Задачи</h1>
+            <button id="reload" type="button">Обновить</button>
+        </div>
+
+        <div id="msg" class="msg hidden"></div>
+
+        <table class="tasks">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Предмет</th>
+                    <th>Задача</th>
+                    <th>До</th>
+                    <th>Вместо</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody id="tasks-body">
+                <tr>
+                    <td colspan="6" class="empty">Загрузка…</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="/static/js/admin.js"></script>
+</body>
+
+</html>
