@@ -1,82 +1,89 @@
 <!doctype html>
 <html lang="ru">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Админка — задачи</title>
-    <link rel="stylesheet" href="/static/css/admin.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Админка — задачи</title>
+  <link rel="stylesheet" href="/static/css/admin.css">
 </head>
-
 <body>
-    <header class="topbar">
-        <div class="brand">homework · admin</div>
-        <div class="user">
-            <span id="me">…</span>
-            <button id="logout" type="button">Выйти</button>
+  <header class="topbar">
+    <div class="brand">homework · admin</div>
+    <div class="user">
+      <span id="me">…</span>
+      <button id="logout" type="button">Выйти</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="msg" class="msg hidden"></div>
+
+    <section class="card">
+      <div class="toolbar">
+        <div class="date-nav">
+          <button id="prev-day" type="button">←</button>
+          <div class="date-display">
+            <div class="date-main" id="date-main">…</div>
+            <div class="date-sub muted" id="date-sub"></div>
+          </div>
+          <button id="next-day" type="button">→</button>
+          <button id="jump-tomorrow" class="link" type="button">Завтра</button>
         </div>
-    </header>
+        <button id="open-create" class="primary" type="button">+ Добавить ДЗ</button>
+      </div>
 
-    <main class="container">
+      <div id="cards" class="cards">
+        <div class="empty">Загрузка…</div>
+      </div>
+    </section>
+  </main>
 
-        <section class="card">
-            <div class="card-head">
-                <h2 id="form-title">Добавить задачу</h2>
-                <button id="cancel-edit" class="link hidden" type="button">Отменить редактирование</button>
-            </div>
-            <form id="task-form" class="task-form">
-                <div class="row">
-                    <label>
-                        Предмет
-                        <select id="f-subject" required></select>
-                    </label>
-                    <label>
-                        Дата сдачи
-                        <input id="f-date-to" type="date" required>
-                    </label>
-                    <label class="checkbox">
-                        <input id="f-instead-of-enable" type="checkbox">
-                        Вместо урока
-                    </label>
-                    <label id="instead-of-wrap" class="hidden">
-                        Вместо
-                        <select id="f-instead-of"></select>
-                    </label>
-                </div>
-                <div class="row">
-                    <label class="grow">
-                        Задача
-                        <textarea id="f-task" rows="2" required placeholder="§5 №12-15"></textarea>
-                    </label>
-                </div>
-                <div class="row actions">
-                    <button type="submit" id="submit-btn">Добавить</button>
-                    <span id="form-hint" class="muted"></span>
-                </div>
-            </form>
-        </section>
+  <div id="modal-backdrop" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 id="modal-title">Добавить ДЗ</h2>
+        <button id="modal-close" class="link" type="button">✕</button>
+      </div>
 
-        <div id="msg" class="msg hidden"></div>
+      <form id="task-form" class="task-form">
+        <div class="row">
+          <label>
+            Предмет
+            <select id="f-subject" required></select>
+          </label>
+          <label>
+            Дата сдачи
+            <input id="f-date-to" type="date" required>
+          </label>
+        </div>
 
-        <section class="card">
-            <div class="date-nav">
-                <button id="prev-day" type="button">←</button>
-                <div class="date-display">
-                    <div class="date-main" id="date-main">…</div>
-                    <div class="date-sub muted" id="date-sub"></div>
-                </div>
-                <button id="next-day" type="button">→</button>
-                <button id="jump-tomorrow" class="link" type="button">Завтра</button>
-            </div>
+        <div class="row">
+          <label class="checkbox">
+            <input id="f-instead-of-enable" type="checkbox">
+            Вместо урока
+          </label>
+          <label id="instead-of-wrap" class="hidden grow">
+            Вместо
+            <select id="f-instead-of"></select>
+          </label>
+        </div>
 
-            <div id="cards" class="cards">
-                <div class="empty">Загрузка…</div>
-            </div>
-        </section>
+        <div class="row">
+          <label class="grow">
+            Текст ДЗ
+            <textarea id="f-task" rows="3" required placeholder="§5 №12-15"></textarea>
+          </label>
+        </div>
 
-    </main>
+        <div class="row actions">
+          <span id="form-hint" class="muted"></span>
+          <button type="button" id="modal-cancel" class="secondary">Отмена</button>
+          <button type="submit" id="submit-btn" class="primary">Добавить</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-    <script src="/static/js/admin.js"></script>
+  <script src="/static/js/admin.js"></script>
 </body>
-
 </html>
