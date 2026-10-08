@@ -9,7 +9,7 @@ import (
 )
 
 func AdminPage(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "web/templates/admin.html")
+	http.ServeFile(w, r, "web/template/admin.html")
 }
 
 func AdminTasks(db *sql.DB) http.HandlerFunc {
