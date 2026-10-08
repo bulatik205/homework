@@ -61,6 +61,10 @@ func main() {
 	mux.HandleFunc("/api/admin/schedule/next",
 		web.RequireAuth(database, web.RequireAdmin(web.AdminScheduleNext)))
 
+	mux.HandleFunc("/docs", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "web/templates/docs.html")
+	})
+
 	mux.Handle("/static/",
 		http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
 

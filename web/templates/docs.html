@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Документация — homework API</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --surface-2: #0f0f0f;
+            --border: #262626;
+            --text: #ededed;
+            --muted: #8a8a8a;
+            --accent: #ffffff;
+            --error: #ff5555;
+            --ok: #55dd88;
+            --get: #55dd88;
+            --post: #66aaff;
+            --patch: #ffcc66;
+            --delete: #ff5555;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        body {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        aside {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 24px 20px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+        }
+
+        aside .brand {
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
+        }
+
+        aside .subtitle {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 24px;
+        }
+
+        aside nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        aside nav .section {
+            color: var(--muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin: 16px 0 6px;
+        }
+
+        aside nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: background 0.12s ease;
+        }
+
+        aside nav a:hover {
+            background: var(--surface-2);
+        }
+
+        main {
+            padding: 40px 48px 80px;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 40px 0 12px;
+            letter-spacing: -0.01em;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        h2:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin: 24px 0 8px;
+        }
+
+        p {
+            margin: 8px 0;
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        code {
+            font-family: "SF Mono", Menlo, Consolas, monospace;
+            font-size: 13px;
+            background: var(--surface-2);
+            padding: 2px 6px;
+            border-radius: 5px;
+            color: #cfcfcf;
+        }
+
+        pre {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        a {
+            color: var(--text);
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        .endpoint {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+
+        .endpoint-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-family: "SF Mono", Menlo, Consolas, monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            border: 1px solid currentColor;
+        }
+
+        .method.get {
+            color: var(--get);
+        }
+
+        .method.post {
+            color: var(--post);
+        }
+
+        .method.patch {
+            color: var(--patch);
+        }
+
+        .method.delete {
+            color: var(--delete);
+        }
+
+        .path {
+            font-family: "SF Mono", Menlo, Consolas, monospace;
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .endpoint .desc {
+            color: var(--muted);
+            font-size: 13px;
+            margin: 4px 0 12px;
+        }
+
+        .endpoint .desc strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+        }
+
+        .param-table th,
+        .param-table td {
+            text-align: left;
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            vertical-align: top;
+        }
+
+        .param-table th {
+            color: var(--muted);
+            font-weight: 500;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .param-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .param-table td code {
+            background: none;
+            padding: 0;
+            color: #cfcfcf;
+        }
+
+        .badge-required {
+            color: var(--error);
+            font-size: 11px;
+            margin-left: 4px;
+        }
+
+        .badge-optional {
+            color: var(--muted);
+            font-size: 11px;
+            margin-left: 4px;
+        }
+
+        @media (max-width: 800px) {
+            body {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                position: static;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            main {
+                padding: 24px 20px 60px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            h2 {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside>
+        <div class="brand">homework</div>
+        <div class="subtitle">API документация</div>
+        <nav>
+            <div class="section">Общее</div>
+            <a href="#intro">Введение</a>
+            <a href="#response">Формат ответа</a>
+
+            <div class="section">Публичный API</div>
+            <a href="#ping">GET /api/v1/ping</a>
+            <a href="#subjects">GET /api/v1/subjects</a>
+            <a href="#tasks-list">GET /api/v1/tasks</a>
+
+            <div class="section">Auth</div>
+            <a href="#auth-register">POST /api/auth/register</a>
+            <a href="#auth-login">POST /api/auth/login</a>
+            <a href="#auth-logout">POST /api/auth/logout</a>
+            <a href="#auth-me">GET /api/auth/me</a>
+
+            <div class="section">Админка</div>
+            <a href="#admin-tasks-list">GET /api/admin/tasks</a>
+            <a href="#admin-tasks-create">POST /api/admin/tasks</a>
+            <a href="#admin-tasks-update">PATCH /api/admin/tasks/{id}</a>
+            <a href="#admin-tasks-delete">DELETE /api/admin/tasks/{id}</a>
+            <a href="#admin-subjects">GET /api/admin/subjects</a>
+            <a href="#admin-schedule-day">GET /api/admin/schedule/day</a>
+            <a href="#admin-schedule-next">GET /api/admin/schedule/next</a>
+        </nav>
+    </aside>
+
+    <main>
+
+        <h1>Документация API</h1>
+        <p class="muted">Backend для домашки.</p>
+
+        <h2 id="intro">Введение</h2>
+        <p>Все эндпоинты возвращают JSON. Базовый URL:</p>
+        <pre><code>https://hw.bulatik.website</code></pre>
+        <p>Прямые запросы к <code>https://hw.bulatik.website</code> не требуют секрета.</p>
+
+        <h2 id="response">Формат ответа</h2>
+        <p>Успех:</p>
+        <pre><code>{
+  "success": true,
+  "body": { ... }
+}</code></pre>
+        <p>Ошибка:</p>
+        <pre><code>{
+  "success": false,
+  "error": "описание ошибки",
+  "code": 400
+}</code></pre>
+
+        <h2 id="ping">GET /api/v1/ping</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method get">GET</span>
+                <span class="path">/api/v1/ping</span>
+            </div>
+            <div class="desc">Проверка живости бэкенда.</div>
+            <h3>Ответ</h3>
+            <pre><code>{ "success": true }</code></pre>
+        </div>
+
+        <h2 id="subjects">GET /api/v1/subjects</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method get">GET</span>
+                <span class="path">/api/v1/subjects</span>
+            </div>
+            <div class="desc">Список предметов с кодами и отображаемыми названиями.</div>
+            <h3>Ответ</h3>
+            <pre><code>{
+  "success": true,
+  "body": [
+    { "code": "math", "display": "Алгебра" },
+    { "code": "history", "display": "История" }
+  ]
+}</code></pre>
+        </div>
+
+        <h2 id="tasks-list">GET /api/v1/tasks</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method get">GET</span>
+                <span class="path">/api/v1/tasks</span>
+            </div>
+            <div class="desc">Список задач. Публичный, без авторизации.</div>
+            <h3>Query-параметры</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Тип</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>date</code><span class="badge-optional">optional</span></td>
+                        <td>string</td>
+                        <td>Фильтр по дате сдачи (<code>YYYY-MM-DD</code>). Совпадает с <code>date_to</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>subject</code><span class="badge-optional">optional</span></td>
+                        <td>string</td>
+                        <td>Фильтр по коду предмета, например <code>math</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>recency</code><span class="badge-optional">optional</span></td>
+                        <td>string</td>
+                        <td><code>last</code> — сортировка по <code>id DESC</code> (последние добавленные). Без
+                            параметра — по предмету и id.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Пример</h3>
+            <pre><code>GET /api/v1/tasks?date=2026-10-09
+GET /api/v1/tasks?subject=math&recency=last</code></pre>
+            <h3>Ответ</h3>
+            <pre><code>{
+  "success": true,
+  "body": [
+    {
+      "id": 1,
+      "subject": "math",
+      "task": "§5 №12-15",
+      "date_from": "2026-10-08",
+      "date_to": "2026-10-12",
+      "status": null,
+      "instead_of": null,
+      "created_at": "2026-10-08 22:13:58",
+      "updated_at": "2026-10-08 22:13:58"
+    }
+  ]
+}</code></pre>
+        </div>
+
+        <h2 id="auth-register">POST /api/auth/register</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method post">POST</span>
+                <span class="path">/api/auth/register</span>
+            </div>
+            <div class="desc">Регистрация нового пользователя по ключу доступа.</div>
+            <h3>Body (JSON)</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Поле</th>
+                        <th>Тип</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>username</code><span class="badge-required">required</span></td>
+                        <td>string</td>
+                        <td>Логин, минимум 3 символа.</td>
+                    </tr>
+                    <tr>
+                        <td><code>password</code><span class="badge-required">required</span></td>
+                        <td>string</td>
+                        <td>Пароль, минимум 6 символов.</td>
+                    </tr>
+                    <tr>
+                        <td><code>key</code><span class="badge-required">required</span></td>
+                        <td>string</td>
+                        <td>Ключ в формате <code>id:original</code>.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Ответ</h3>
+            <pre><code>{
+  "success": true,
+  "body": {
+    "id": 2,
+    "username": "bulat",
+    "role": "user",
+    "created_at": ""
+  }
+}</code></pre>
+            <p class="muted">Устанавливает cookie <code>session_str</code>.</p>
+        </div>
+
+        <h2 id="auth-login">POST /api/auth/login</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method post">POST</span>
+                <span class="path">/api/auth/login</span>
+            </div>
+            <div class="desc">Вход по логину и паролю.</div>
+            <h3>Body (JSON)</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Поле</th>
+                        <th>Тип</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>username</code><span class="badge-required">required</span></td>
+                        <td>string</td>
+                        <td>Логин.</td>
+                    </tr>
+                    <tr>
+                        <td><code>password</code><span class="badge-required">required</span></td>
+                        <td>string</td>
+                        <td>Пароль.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Ответ</h3>
+            <pre><code>{
+  "success": true,
+  "body": {
+    "id": 1,
+    "username": "bulat",
+    "role": "admin",
+    "created_at": "2026-10-08 20:15:00"
+  }
+}</code></pre>
+        </div>
+
+        <h2 id="auth-logout">POST /api/auth/logout</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method post">POST</span>
+                <span class="path">/api/auth/logout</span>
+            </div>
+            <div class="desc">Выход. Очищает <code>session_str</code> в БД и удаляет cookie.</div>
+            <pre><code>{ "success": true }</code></pre>
+        </div>
+
+        <h2 id="auth-me">GET /api/auth/me</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method get">GET</span>
+                <span class="path">/api/auth/me</span>
+            </div>
+            <div class="desc">Информация о текущем пользователе. Требует cookie <code>session_str</code>.</div>
+            <pre><code>{
+  "success": true,
+  "body": {
+    "id": 1,
+    "username": "bulat",
+    "role": "admin",
+    "created_at": "2026-10-08 20:15:00"
+  }
+}</code></pre>
+            <p class="muted">401 если сессия отсутствует или истекла.</p>
+        </div>
+
+        <h2 id="admin-tasks-list">GET /api/admin/tasks</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method get">GET</span>
+                <span class="path">/api/admin/tasks</span>
+            </div>
+            <div class="desc"><strong>Только для админов.</strong> Список задач.</div>
+            <h3>Query-параметры</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Тип</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>date</code><span class="badge-optional">optional</span></td>
+                        <td>string</td>
+                        <td>Фильтр по дате сдачи (<code>YYYY-MM-DD</code>).</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="muted">Лимит: 500 записей. Сортировка: по предмету и id.</p>
+        </div>
+
+        <h2 id="admin-tasks-create">POST /api/admin/tasks</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method post">POST</span>
+                <span class="path">/api/admin/tasks</span>
+            </div>
+            <div class="desc"><strong>Только для админов.</strong> Создание задачи.</div>
+            <h3>Body (JSON)</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Поле</th>
+                        <th>Тип</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>subject</code><span class="badge-required">required</span></td>
+                        <td>string</td>
+                        <td>Код предмета.</td>
+                    </tr>
+                    <tr>
+                        <td><code>task</code><span class="badge-required">required</span></td>
+                        <td>string</td>
+                        <td>Текст задания.</td>
+                    </tr>
+                    <tr>
+                        <td><code>date_to</code><span class="badge-optional">optional</span></td>
+                        <td>string</td>
+                        <td>Дата сдачи (<code>YYYY-MM-DD</code>).</td>
+                    </tr>
+                    <tr>
+                        <td><code>date_from</code><span class="badge-optional">optional</span></td>
+                        <td>string</td>
+                        <td>Дата выдачи.</td>
+                    </tr>
+                    <tr>
+                        <td><code>status</code><span class="badge-optional">optional</span></td>
+                        <td>string</td>
+                        <td>Статус (<code>todo</code>, <code>done</code>, ...).</td>
+                    </tr>
+                    <tr>
+                        <td><code>instead_of</code><span class="badge-optional">optional</span></td>
+                        <td>string</td>
+                        <td>Код предмета, вместо которого задана задача.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Пример</h3>
+            <pre><code>{
+  "subject": "social",
+  "task": "параграф 5",
+  "date_to": "2026-10-09",
+  "instead_of": "history"
+}</code></pre>
+            <h3>Ответ</h3>
+            <pre><code>{
+  "success": true,
+  "body": { "id": 12, "subject": "social", ... }
+}</code></pre>
+        </div>
+
+        <h2 id="admin-tasks-update">PATCH /api/admin/tasks/{id}</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method patch">PATCH</span>
+                <span class="path">/api/admin/tasks/{id}</span>
+            </div>
+            <div class="desc"><strong>Только для админов.</strong> Обновление задачи. Все поля обязательны.</div>
+            <h3>Body (JSON)</h3>
+            <p class="muted">Те же поля, что и при создании.</p>
+            <h3>Пример</h3>
+            <pre><code>PATCH /api/admin/tasks/12
+{
+  "subject": "social",
+  "task": "параграф 5-6",
+  "date_to": "2026-10-09",
+  "instead_of": "history"
+}</code></pre>
+        </div>
+
+        <h2 id="admin-tasks-delete">DELETE /api/admin/tasks/{id}</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method delete">DELETE</span>
+                <span class="path">/api/admin/tasks/{id}</span>
+            </div>
+            <div class="desc"><strong>Только для админов.</strong> Удаление задачи.</div>
+            <pre><code>{ "success": true }</code></pre>
+        </div>
+
+        <h2 id="admin-subjects">GET /api/admin/subjects</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method get">GET</span>
+                <span class="path">/api/admin/subjects</span>
+            </div>
+            <div class="desc"><strong>Только для админов.</strong> То же, что <a href="#subjects">/api/v1/subjects</a>.
+            </div>
+        </div>
+
+        <h2 id="admin-schedule-day">GET /api/admin/schedule/day</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method get">GET</span>
+                <span class="path">/api/admin/schedule/day</span>
+            </div>
+            <div class="desc"><strong>Только для админов.</strong> Уроки по расписанию на конкретный день.</div>
+            <h3>Query-параметры</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Тип</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>date</code><span class="badge-required">required</span></td>
+                        <td>string</td>
+                        <td>Дата (<code>YYYY-MM-DD</code>).</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Ответ</h3>
+            <pre><code>{
+  "success": true,
+  "body": {
+    "date": "2026-10-09",
+    "day": 4,
+    "day_name": "Пт",
+    "lessons": [
+      { "code": "math", "display": "Алгебра" },
+      { "code": "history", "display": "История" }
+    ]
+  }
+}</code></pre>
+        </div>
+
+        <h2 id="admin-schedule-next">GET /api/admin/schedule/next</h2>
+        <div class="endpoint">
+            <div class="endpoint-head">
+                <span class="method get">GET</span>
+                <span class="path">/api/admin/schedule/next</span>
+            </div>
+            <div class="desc"><strong>Только для админов.</strong> Ближайшая дата, когда стоит указанный предмет.
+                Сегодняшний день <strong>не</strong> учитывается — только будущее.</div>
+            <h3>Query-параметры</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Тип</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>subject</code><span class="badge-required">required</span></td>
+                        <td>string</td>
+                        <td>Код предмета.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Ответ</h3>
+            <pre><code>{
+  "success": true,
+  "body": {
+    "date": "2026-10-15",
+    "day": 3,
+    "day_name": "Чт"
+  }
+}</code></pre>
+            <p class="muted">404 если урок не найден в ближайшие 14 дней.</p>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
