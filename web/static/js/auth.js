@@ -58,7 +58,7 @@
         });
         if (body.success) {
             showMsg("Успех! Сейчас перенаправим…", true);
-            setTimeout(() => location.href = "/", 800);
+            setTimeout(() => location.href = "/admin", 800);
         } else {
             showMsg(body.error || `Ошибка (${status})`, false);
         }
@@ -74,7 +74,7 @@
         });
         if (body.success) {
             showMsg("Аккаунт создан! Сейчас перенаправим…", true);
-            setTimeout(() => location.href = "/", 800);
+            setTimeout(() => location.href = "/admin", 800);
         } else {
             showMsg(body.error || `Ошибка (${status})`, false);
         }
