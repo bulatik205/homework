@@ -238,32 +238,6 @@
         fInsteadWrap.classList.add("hidden");
         fInstead.innerHTML = "";
 
-        const defaultSubject = subjects[0]?.code || "";
-        fSubject.value = defaultSubject;
-        fSubject.disabled = false;
-        fDateTo.disabled = false;
-
-        const fallbackDate = fmtDate(currentDate);
-        fDateTo.value = fallbackDate;
-
-        openModal();
-        if (defaultSubject) {
-            fetchNextLessonDate(defaultSubject).then(d => {
-                if (d && !fDateTo.dataset.userModified) fDateTo.value = d;
-            });
-        }
-    }
-
-    function openCreate() {
-        editingId = null;
-        editingTask = null;
-        modalTitle.textContent = "Добавить ДЗ";
-        submitBtn.textContent = "Добавить";
-        form.reset();
-        fInsteadEnable.checked = false;
-        fInsteadWrap.classList.add("hidden");
-        fInstead.innerHTML = "";
-
         fSubject.disabled = false;
         fDateTo.disabled = false;
         fInsteadEnable.disabled = false;
@@ -283,6 +257,37 @@
                 if (d && !fDateTo.dataset.userModified) fDateTo.value = d;
             });
         }
+    }
+
+    function openEdit(t) {
+        editingId = t.id;
+        editingTask = t;
+
+        modalTitle.textContent = `Изменить ДЗ #${t.id}`;
+        submitBtn.textContent = "Сохранить";
+
+        fSubject.value = t.subject;
+        fDateTo.value = t.date_to || fmtDate(currentDate);
+        fTask.value = t.task;
+
+        if (t.instead_of) {
+            fInsteadEnable.checked = true;
+            fInsteadWrap.classList.remove("hidden");
+            refreshInsteadOptions(fDateTo.value).then(() => {
+                fInstead.value = t.instead_of;
+            });
+        } else {
+            fInsteadEnable.checked = false;
+            fInsteadWrap.classList.add("hidden");
+            fInstead.innerHTML = "";
+        }
+
+        fSubject.disabled = true;
+        fDateTo.disabled = true;
+        fInsteadEnable.disabled = true;
+        fInstead.disabled = true;
+
+        openModal();
     }
 
     openCreateBtn.addEventListener("click", openCreate);
