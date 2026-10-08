@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Домашка</title>
+  <link rel="stylesheet" href="/static/css/public.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Домашка</div>
+    <div class="user">
+      <a href="/admin" class="link">Войти</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="msg" class="msg hidden"></div>
+
+    <section class="card">
+      <div class="toolbar">
+        <div class="date-nav">
+          <button id="prev-day" type="button">←</button>
+          <div class="date-display">
+            <div class="date-main" id="date-main">…</div>
+            <div class="date-sub muted" id="date-sub"></div>
+          </div>
+          <button id="next-day" type="button">→</button>
+          <button id="jump-tomorrow" class="link" type="button">Завтра</button>
+        </div>
+      </div>
+
+      <div id="cards" class="cards">
+        <div class="empty">Загрузка…</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/js/public.js"></script>
+</body>
+</html>

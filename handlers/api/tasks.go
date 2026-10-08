@@ -20,6 +20,7 @@ func GetTasks(db *sql.DB) http.HandlerFunc {
 
 		subject := q.Get("subject")
 		recency := q.Get("recency")
+		dateStr := q.Get("date")
 
 		query := `SELECT id, subject, task, date_from, date_to, status, instead_of, created_at, updated_at
 		          FROM tasks WHERE 1=1`
@@ -30,14 +31,19 @@ func GetTasks(db *sql.DB) http.HandlerFunc {
 			args = append(args, subject)
 		}
 
+		if dateStr != "" {
+			query += " AND date_to = ?"
+			args = append(args, dateStr)
+		}
+
 		switch recency {
 		case "last":
 			query += " ORDER BY id DESC"
 		default:
-			query += " ORDER BY date_to IS NULL, date_to ASC, id DESC"
+			query += " ORDER BY subject, id"
 		}
 
-		query += " LIMIT 100"
+		query += " LIMIT 200"
 
 		rows, err := db.QueryContext(r.Context(), query, args...)
 		if err != nil {
@@ -49,7 +55,6 @@ func GetTasks(db *sql.DB) http.HandlerFunc {
 		tasks := []models.Task{}
 		for rows.Next() {
 			var t models.Task
-
 			var dateFrom, dateTo sql.NullTime
 			var status, insteadOf sql.NullString
 			var cf, uf sql.NullTime

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"homework/config"
 	"homework/db"
 	"homework/handlers/api"
@@ -20,9 +19,7 @@ func main() {
 	defer database.Close()
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello!")
-	})
+
 	mux.HandleFunc("/api/v1/ping", api.Ping)
 	mux.HandleFunc("/api/v1/tasks", api.GetTasks(database))
 
@@ -34,7 +31,6 @@ func main() {
 
 	mux.HandleFunc("/admin",
 		web.RequireAuth(database, web.RequireAdmin(web.AdminPage)))
-
 	mux.HandleFunc("/api/admin/tasks",
 		web.RequireAuth(database, web.RequireAdmin(func(w http.ResponseWriter, r *http.Request) {
 			switch r.Method {
@@ -46,7 +42,6 @@ func main() {
 				http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 			}
 		})))
-
 	mux.HandleFunc("/api/admin/tasks/",
 		web.RequireAuth(database, web.RequireAdmin(func(w http.ResponseWriter, r *http.Request) {
 			switch r.Method {
@@ -58,7 +53,6 @@ func main() {
 				http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 			}
 		})))
-
 	mux.HandleFunc("/api/admin/subjects",
 		web.RequireAuth(database, web.RequireAdmin(web.AdminSubjects)))
 	mux.HandleFunc("/api/admin/schedule/day",
@@ -66,8 +60,19 @@ func main() {
 	mux.HandleFunc("/api/admin/schedule/next",
 		web.RequireAuth(database, web.RequireAdmin(web.AdminScheduleNext)))
 
-	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
+	mux.Handle("/static/",
+		http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
+
+	mux.HandleFunc("/", PublicPage)
 
 	log.Printf("listening on 127.0.0.1:%s", cfg.ServerPort)
 	log.Fatal(http.ListenAndServe("127.0.0.1:"+cfg.ServerPort, mux))
+}
+
+func PublicPage(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+	http.ServeFile(w, r, "web/templates/public.html")
 }
