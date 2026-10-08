@@ -18,30 +18,62 @@
     </header>
 
     <main class="container">
-        <div class="toolbar">
-            <h1>Задачи</h1>
-            <button id="reload" type="button">Обновить</button>
-        </div>
+
+        <section class="card">
+            <div class="card-head">
+                <h2 id="form-title">Добавить задачу</h2>
+                <button id="cancel-edit" class="link hidden" type="button">Отменить редактирование</button>
+            </div>
+            <form id="task-form" class="task-form">
+                <div class="row">
+                    <label>
+                        Предмет
+                        <select id="f-subject" required></select>
+                    </label>
+                    <label>
+                        Дата сдачи
+                        <input id="f-date-to" type="date" required>
+                    </label>
+                    <label class="checkbox">
+                        <input id="f-instead-of-enable" type="checkbox">
+                        Вместо урока
+                    </label>
+                    <label id="instead-of-wrap" class="hidden">
+                        Вместо
+                        <select id="f-instead-of"></select>
+                    </label>
+                </div>
+                <div class="row">
+                    <label class="grow">
+                        Задача
+                        <textarea id="f-task" rows="2" required placeholder="§5 №12-15"></textarea>
+                    </label>
+                </div>
+                <div class="row actions">
+                    <button type="submit" id="submit-btn">Добавить</button>
+                    <span id="form-hint" class="muted"></span>
+                </div>
+            </form>
+        </section>
 
         <div id="msg" class="msg hidden"></div>
 
-        <table class="tasks">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Предмет</th>
-                    <th>Задача</th>
-                    <th>До</th>
-                    <th>Вместо</th>
-                    <th>Статус</th>
-                </tr>
-            </thead>
-            <tbody id="tasks-body">
-                <tr>
-                    <td colspan="6" class="empty">Загрузка…</td>
-                </tr>
-            </tbody>
-        </table>
+        <section class="card">
+            <div class="date-nav">
+                <button id="prev-day" type="button">←</button>
+                <div class="date-display">
+                    <div class="date-main" id="date-main">…</div>
+                    <div class="date-sub muted" id="date-sub"></div>
+                </div>
+                <button id="next-day" type="button">→</button>
+                <button id="jump-tomorrow" class="link" type="button">Завтра</button>
+            </div>
+
+            <div id="cards" class="cards">
+                <div class="empty">Загрузка…</div>
+            </div>
+        </section>
+
     </main>
 
     <script src="/static/js/admin.js"></script>

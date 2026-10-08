@@ -173,3 +173,209 @@ table.tasks tr:hover td {
     color: #ffcc66;
     border-color: rgba(255, 204, 102, 0.3);
 }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.card-head h2 {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.link:hover { color: var(--text); background: var(--surface-2); }
+
+.task-form { display: flex; flex-direction: column; gap: 12px; }
+
+.task-form .row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.task-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.task-form label.grow { flex: 1; min-width: 240px; }
+
+.task-form label.checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text);
+  padding-bottom: 10px;
+}
+
+.task-form select,
+.task-form input[type="date"],
+.task-form textarea {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: inherit;
+  outline: none;
+  min-width: 180px;
+}
+
+.task-form textarea { resize: vertical; min-height: 44px; }
+
+.task-form select:focus,
+.task-form input:focus,
+.task-form textarea:focus { border-color: #444; }
+
+.task-form .actions { align-items: center; }
+
+.task-form .actions button {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.task-form .actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.muted { color: var(--muted); font-size: 13px; }
+
+.date-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.date-nav button {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.date-nav button:hover { border-color: #444; }
+
+.date-nav button.link {
+  width: auto;
+  height: auto;
+  padding: 6px 10px;
+  background: transparent;
+}
+
+.date-display { flex: 1; text-align: center; }
+.date-main { font-size: 16px; font-weight: 600; }
+.date-sub { font-size: 12px; }
+
+.cards { display: flex; flex-direction: column; gap: 12px; }
+
+.cards .empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 24px;
+}
+
+.task-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.task-card:hover { border-color: #333; }
+
+.task-card .body { flex: 1; min-width: 0; }
+
+.task-card .subject {
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.task-card .task-text {
+  color: #cfcfcf;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.task-card .meta {
+  margin-top: 8px;
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+
+.task-card .actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.task-card .actions button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.task-card .actions button:hover { border-color: #444; }
+.task-card .actions button.danger { color: var(--error); }
+.task-card .actions button.danger:hover { border-color: var(--error); }
+
+.badge.subject {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-color: #333;
+}
+
+.badge.instead {
+  color: #ffcc66;
+  border-color: rgba(255, 204, 102, 0.3);
+  background: rgba(255, 204, 102, 0.05);
+}

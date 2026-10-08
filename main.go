@@ -32,9 +32,39 @@ func main() {
 	mux.HandleFunc("/api/auth/logout", web.Logout(database))
 	mux.HandleFunc("/api/auth/me", web.Me(database))
 
-	mux.HandleFunc("/admin", web.RequireAuth(database, web.RequireAdmin(web.AdminPage)))
+	mux.HandleFunc("/admin",
+		web.RequireAuth(database, web.RequireAdmin(web.AdminPage)))
 
-	mux.HandleFunc("/api/admin/tasks", web.RequireAuth(database, web.RequireAdmin(web.AdminTasks(database))))
+	mux.HandleFunc("/api/admin/tasks",
+		web.RequireAuth(database, web.RequireAdmin(func(w http.ResponseWriter, r *http.Request) {
+			switch r.Method {
+			case http.MethodGet:
+				web.AdminTasks(database)(w, r)
+			case http.MethodPost:
+				web.CreateTask(database)(w, r)
+			default:
+				http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			}
+		})))
+
+	mux.HandleFunc("/api/admin/tasks/",
+		web.RequireAuth(database, web.RequireAdmin(func(w http.ResponseWriter, r *http.Request) {
+			switch r.Method {
+			case http.MethodPatch, http.MethodPut:
+				web.UpdateTask(database)(w, r)
+			case http.MethodDelete:
+				web.DeleteTask(database)(w, r)
+			default:
+				http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			}
+		})))
+
+	mux.HandleFunc("/api/admin/subjects",
+		web.RequireAuth(database, web.RequireAdmin(web.AdminSubjects)))
+	mux.HandleFunc("/api/admin/schedule/day",
+		web.RequireAuth(database, web.RequireAdmin(web.AdminScheduleDay)))
+	mux.HandleFunc("/api/admin/schedule/next",
+		web.RequireAuth(database, web.RequireAdmin(web.AdminScheduleNext)))
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
 
