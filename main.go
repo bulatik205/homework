@@ -7,10 +7,15 @@ import (
 	"homework/handlers/web"
 	"log"
 	"net/http"
+
+	alice "github.com/bulatik205/homework-alice-sdk"
+	homework "github.com/bulatik205/homework-sdk-go"
 )
 
 func main() {
 	cfg := config.LoadConfig()
+
+	hwClient := homework.New(homework.WithBaseURL(cfg.ServerURL))
 
 	database, err := db.Connect(cfg.GetDSN())
 	if err != nil {
@@ -19,6 +24,8 @@ func main() {
 	defer database.Close()
 
 	mux := http.NewServeMux()
+
+	mux.HandleFunc("/api/v1/yandexAlice", alice.Run(alice.Config{HW: hwClient}))
 
 	mux.HandleFunc("/api/v1/ping", api.Ping)
 	mux.HandleFunc("/api/v1/tasks", api.GetTasks(database))
