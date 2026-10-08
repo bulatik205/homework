@@ -22,6 +22,7 @@ func main() {
 
 	mux.HandleFunc("/api/v1/ping", api.Ping)
 	mux.HandleFunc("/api/v1/tasks", api.GetTasks(database))
+	mux.HandleFunc("/api/v1/subjects", api.GetSubjects)
 
 	mux.HandleFunc("/auth", web.AuthPage)
 	mux.HandleFunc("/api/auth/register", web.Register(database))

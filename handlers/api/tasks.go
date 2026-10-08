@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"sort"
 
+	"homework/domain"
 	"homework/models"
 )
 
@@ -104,6 +106,31 @@ func GetTasks(db *sql.DB) http.HandlerFunc {
 			Body:    tasks,
 		})
 	}
+}
+func GetSubjects(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	type item struct {
+		Code    string `json:"code"`
+		Display string `json:"display"`
+	}
+
+	list := make([]item, 0, len(domain.Names))
+	for code, name := range domain.Names {
+		list = append(list, item{Code: code, Display: name})
+	}
+
+	sort.Slice(list, func(i, j int) bool {
+		return list[i].Display < list[j].Display
+	})
+
+	writeJSON(w, http.StatusOK, models.Response[[]item]{
+		Success: true,
+		Body:    list,
+	})
 }
 
 func writeJSON(w http.ResponseWriter, code int, v any) {

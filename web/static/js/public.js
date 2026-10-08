@@ -8,7 +8,6 @@
     const cardsEl = document.getElementById("cards");
 
     let currentDate = new Date();
-
     let subjectsMap = {};
 
     function fmtDate(d) {
@@ -17,16 +16,19 @@
         const day = String(d.getDate()).padStart(2, "0");
         return `${y}-${m}-${day}`;
     }
+
     function addDays(d, n) {
         const x = new Date(d);
         x.setDate(x.getDate() + n);
         return x;
     }
+
     function humanDate(d) {
         const days = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
         const months = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
         return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
     }
+
     function escapeHtml(s) {
         return String(s ?? "")
             .replaceAll("&", "&amp;")
@@ -34,9 +36,11 @@
             .replaceAll(">", "&gt;")
             .replaceAll('"', "&quot;");
     }
+
     function displayName(code) {
         return subjectsMap[code] || code;
     }
+
     function showMsg(text, ok) {
         msg.textContent = text;
         msg.className = "msg " + (ok ? "ok" : "err");
@@ -50,12 +54,26 @@
         return { status: r.status, body };
     }
 
+    async function loadSubjects() {
+        const { status, body } = await api("/api/v1/subjects");
+        if (status === 200 && body?.success) {
+            subjectsMap = {};
+            for (const s of body.body || []) {
+                subjectsMap[s.code] = s.display;
+            }
+        } else {
+            console.warn("subjects load failed", status, body);
+        }
+    }
+
     function updateDateUI() {
         dateMain.textContent = humanDate(currentDate);
+
         const today = new Date();
         const diff = Math.round(
             (currentDate - new Date(today.getFullYear(), today.getMonth(), today.getDate())) / 86400000
         );
+
         if (diff === 0) dateSub.textContent = "сегодня";
         else if (diff === 1) dateSub.textContent = "завтра";
         else if (diff === -1) dateSub.textContent = "вчера";
@@ -80,6 +98,7 @@
         cardsEl.innerHTML = `<div class="empty">Загрузка…</div>`;
         const dateStr = fmtDate(currentDate);
         const { status, body } = await api(`/api/v1/tasks?date=${dateStr}`);
+
         if (status !== 200 || !body?.success) {
             cardsEl.innerHTML = `<div class="empty">Не удалось загрузить</div>`;
             showMsg(body?.error || `Ошибка (${status})`, false);
@@ -93,12 +112,15 @@
             cardsEl.innerHTML = `<div class="empty">На этот день задач нет</div>`;
             return;
         }
+
         cardsEl.innerHTML = tasks.map(t => {
             const instead = t.instead_of
                 ? `<span class="badge instead">вместо ${escapeHtml(displayName(t.instead_of))}</span>`
                 : "";
             const status = t.status
-                ? `<span class="badge">${escapeHtml(t.status)}</span>` : "";
+                ? `<span class="badge">${escapeHtml(t.status)}</span>`
+                : "";
+
             return `
         <div class="task-card">
           <div class="body">
@@ -114,7 +136,8 @@
         }).join("");
     }
 
-    function init() {
+    async function init() {
+        await loadSubjects();
         const today = new Date();
         setDate(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1));
     }
