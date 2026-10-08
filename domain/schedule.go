@@ -9,7 +9,6 @@ var Weekly = map[int][]string{
 		"history",
 	},
 	1: {
-		"informatics",
 		"physics",
 		"physics",
 		"russian",
@@ -26,11 +25,9 @@ var Weekly = map[int][]string{
 		"projects",
 	},
 	3: {
-		"informatics",
 		"english",
 		"geometry",
 		"geometry",
-		"pe",
 		"history",
 		"biology",
 		"history",
@@ -43,12 +40,11 @@ var Weekly = map[int][]string{
 		"geography",
 		"social",
 		"social",
-		"pe",
 	},
 	5: {
 		"math",
 		"math",
-		"english",
+		"russian",
 		"projects",
 	},
 }
