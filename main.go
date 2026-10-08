@@ -32,6 +32,10 @@ func main() {
 	mux.HandleFunc("/api/auth/logout", web.Logout(database))
 	mux.HandleFunc("/api/auth/me", web.Me(database))
 
+	mux.HandleFunc("/admin", web.RequireAuth(database, web.RequireAdmin(web.AdminPage)))
+
+	mux.HandleFunc("/api/admin/tasks", web.RequireAuth(database, web.RequireAdmin(web.AdminTasks(database))))
+
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
 
 	log.Printf("listening on 127.0.0.1:%s", cfg.ServerPort)

@@ -7,6 +7,7 @@ type Task struct {
 	DateFrom  *string `json:"date_from,omitempty"`
 	DateTo    *string `json:"date_to,omitempty"`
 	Status    *string `json:"status,omitempty"`
+	InsteadOf *string `json:"instead_of,omitempty"`
 	CreatedAt string  `json:"created_at"`
 	UpdatedAt string  `json:"updated_at"`
 }

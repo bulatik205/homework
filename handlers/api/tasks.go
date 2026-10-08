@@ -21,7 +21,7 @@ func GetTasks(db *sql.DB) http.HandlerFunc {
 		subject := q.Get("subject")
 		recency := q.Get("recency")
 
-		query := `SELECT id, subject, task, date_from, date_to, status, created_at, updated_at
+		query := `SELECT id, subject, task, date_from, date_to, status, instead_of, created_at, updated_at
 		          FROM tasks WHERE 1=1`
 		args := []any{}
 
@@ -51,12 +51,12 @@ func GetTasks(db *sql.DB) http.HandlerFunc {
 			var t models.Task
 
 			var dateFrom, dateTo sql.NullTime
-			var status sql.NullString
+			var status, insteadOf sql.NullString
 			var cf, uf sql.NullTime
 
 			if err := rows.Scan(
 				&t.ID, &t.Subject, &t.Task,
-				&dateFrom, &dateTo, &status,
+				&dateFrom, &dateTo, &status, &insteadOf,
 				&cf, &uf,
 			); err != nil {
 				log.Printf("getTasks scan: %v", err)
@@ -75,6 +75,10 @@ func GetTasks(db *sql.DB) http.HandlerFunc {
 			if status.Valid {
 				s := status.String
 				t.Status = &s
+			}
+			if insteadOf.Valid {
+				s := insteadOf.String
+				t.InsteadOf = &s
 			}
 			if cf.Valid {
 				t.CreatedAt = cf.Time.Format("2006-01-02 15:04:05")
